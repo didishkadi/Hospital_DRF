@@ -38,11 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'hospital_app',
+    'account',
+    'timetable',
     'rest_framework_simplejwt',
 ]
 
-AUTH_USER_MODEL = 'hospital_app.User'
+AUTH_USER_MODEL = 'account.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
