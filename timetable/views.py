@@ -1,9 +1,8 @@
 from .serializers import (
-    MeetingsSerializer,
-    MeetingPatientSerializer,
+    MeetingsSerializer, MeetingParticipantSerializer
 )
-from .models import Meetings, MeetingPatient
-from rest_framework.generics import ListCreateAPIView, UpdateAPIView
+from .models import Meetings, MeetingParticipants
+from rest_framework.generics import ListCreateAPIView, CreateAPIView, UpdateAPIView
 
 
 class MeetingsList(ListCreateAPIView):
@@ -11,11 +10,11 @@ class MeetingsList(ListCreateAPIView):
     serializer_class = MeetingsSerializer
 
 
-class MeetingPatientList(ListCreateAPIView):
-    queryset = MeetingPatient.objects.all()
-    serializer_class = MeetingPatientSerializer
+class MeetingPatientList(CreateAPIView):
+    queryset = MeetingParticipants.objects.all()
+    serializer_class = MeetingParticipantSerializer
 
 
 class MeetingPatientUpdate(UpdateAPIView):
-    queryset = MeetingPatient.objects.all()
-    serializer_class = MeetingPatientSerializer
+    queryset = MeetingParticipants.objects.all()
+    serializer_class = MeetingParticipantSerializer
