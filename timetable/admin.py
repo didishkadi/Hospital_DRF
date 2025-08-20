@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import (
     Meetings,
-    MeetingPatient,
+    MeetingParticipants,
 )
 
 admin.site.register(Meetings)
-admin.site.register(MeetingPatient)
+admin.site.register(MeetingParticipants)
