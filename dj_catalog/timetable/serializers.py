@@ -1,10 +1,6 @@
 from rest_framework import serializers
-from .models import Doctor, Patient, MedicalCard, Meetings, CardNote, MeetingPatient, User
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'id')
+from .models import Meetings, MeetingPatient
+from account.models import Patient, Doctor
 
 class PatientNameSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,38 +11,6 @@ class DoctorNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
         fields = ['first_name', 'last_name']
-
-
-class CardNoteSerializer(serializers.ModelSerializer):
-    doctor_name = DoctorNameSerializer(read_only = True, source = 'doctor')
-
-    class Meta:
-        model = CardNote
-        fields = ['id', 'doctor', 'doctor_name', 'medical_card', 'date', 'note']
-
-
-class MedicalCardSerializer(serializers.ModelSerializer):
-    notes = CardNoteSerializer(read_only = True, many = True, source = 'cardnote_set')
-    patient_name = PatientNameSerializer(read_only = True, source = 'patient')
-
-    class Meta:
-        model = MedicalCard
-        fields = ['id', 'title', 'content', 'patient', 'patient_name', 'notes']
-
-
-class DoctorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Doctor
-        fields = ['id', 'first_name', 'last_name', 'role', 'specialist']
-
-
-class PatientSerializer(serializers.ModelSerializer):
-    cards = MedicalCardSerializer(read_only = True, many = False, source='medicalcard')
-
-    class Meta: 
-        model = Patient
-        fields = ['id', 'first_name', 'last_name', 'role', 'cards']
-
 
 class MeetingsSerializer(serializers.ModelSerializer):
     doctor_name = DoctorNameSerializer(read_only = True, source = 'doctor')
