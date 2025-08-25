@@ -1,18 +1,18 @@
 from django.shortcuts import render
 from .serializers import (
     MeetingsSerializer, 
-    MeetingPatientSerializer)
-from .models import Meetings, MeetingPatient
-from rest_framework.generics import ListCreateAPIView, UpdateAPIView
+    MeetingParticipantSerializer)
+from .models import Meetings, MeetingParticipant
+from rest_framework.generics import ListCreateAPIView, UpdateAPIView, ListAPIView, RetrieveUpdateAPIView
 
 class MeetingsList(ListCreateAPIView):
     queryset = Meetings.objects.all()
     serializer_class = MeetingsSerializer
 
-class MeetingPatientList(ListCreateAPIView):
-    queryset = MeetingPatient.objects.all()
-    serializer_class = MeetingPatientSerializer
+class MeetingParticipantList(ListAPIView):
+    queryset = MeetingParticipant.objects.all()
+    serializer_class = MeetingParticipantSerializer
 
-class MeetingPatientUpdate(UpdateAPIView):
-    queryset = MeetingPatient.objects.all()
-    serializer_class = MeetingPatientSerializer
+class MeetingParticipantUpdate(RetrieveUpdateAPIView):    
+    queryset = MeetingParticipant.objects.all()
+    serializer_class = MeetingParticipantSerializer
